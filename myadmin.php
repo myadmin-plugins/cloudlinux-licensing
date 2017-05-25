@@ -15,10 +15,10 @@ return [
 	'version' => '1.0.0',
 	'type' => 'licenses',
 	'hooks' => [
-		'function.requirements' => ['Detain\MyAdminCloudlinux\Plugin', 'Requirements'],
+		/* 'function.requirements' => ['Detain\MyAdminCloudlinux\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminCloudlinux\Plugin', 'Settings'],
 		'licenses.activate' => ['Detain\MyAdminCloudlinux\Plugin', 'Activate'],
 		'licenses.change_ip' => ['Detain\MyAdminCloudlinux\Plugin', 'ChangeIp'],
-		'ui.menu' => ['Detain\MyAdminCloudlinux\Plugin', 'Menu']
+		'ui.menu' => ['Detain\MyAdminCloudlinux\Plugin', 'Menu'] */
 	],
 ];
