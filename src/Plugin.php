@@ -15,7 +15,7 @@ class Plugin {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log('licenses', 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
-			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
+			$cl = new \Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->is_licensed($license->get_ip(), true);
 			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
@@ -33,7 +33,7 @@ class Plugin {
 			$settings = get_module_settings('licenses');
 			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
 			function_requirements('class.cloudlinux');
-			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
+			$cl = new \Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->remove_license($license->get_ip(), $event['field1']);
 			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			$event['status'] = 'ok';
