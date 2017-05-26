@@ -16,8 +16,8 @@ return [
 	'type' => 'licenses',
 	'hooks' => [
 		'licenses.settings' => ['Detain\MyAdminCloudlinux\Plugin', 'Settings'],
-		/* 'function.requirements' => ['Detain\MyAdminCloudlinux\Plugin', 'Requirements'],
 		'licenses.activate' => ['Detain\MyAdminCloudlinux\Plugin', 'Activate'],
+		/* 'function.requirements' => ['Detain\MyAdminCloudlinux\Plugin', 'Requirements'],
 		'licenses.change_ip' => ['Detain\MyAdminCloudlinux\Plugin', 'ChangeIp'],
 		'ui.menu' => ['Detain\MyAdminCloudlinux\Plugin', 'Menu'] */
 	],
