@@ -28,21 +28,35 @@ class Plugin {
 	}
 
 	public static function ChangeIp(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_FANTASTICO) {
+		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			$license = $event->getSubject();
 			$settings = get_module_settings('licenses');
-			$cloudlinux = new Cloudlinux(FANTASTICO_USERNAME, FANTASTICO_PASSWORD);
 			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
-			$result = $cloudlinux->editIp($license->get_ip(), $event['newip']);
-			if (isset($result['faultcode'])) {
-				myadmin_log('licenses', 'error', 'Cloudlinux editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+			function_requirements('class.cloudlinux');
+			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
+			$response = $cl->remove_license($license->get_ip(), $event['field1']);
+			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+			$event['status'] = 'ok';
+			$event['status_text'] = 'The IP Address has been changed.';
+			if ($response === false) {
 				$event['status'] = 'error';
-				$event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
+				$event['status_text'] = 'Error removing the old license.';
 			} else {
+				$response = $cl->is_licensed($event['newip'], true);
+				myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+				if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
+					$response = $cl->license($event['newip'], $event['field1']);
+					//$license_extra = $response['mainKeyNumber'] . ',' . $response['productKey'];
+					myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+					if ($response === false) {
+						$event['status'] = 'error';
+						$event['status_text'] = 'Error Licensign the new IP.';
+					}
+				}
+			}
+			if ($event['status'] == 'ok') {
 				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $license->get_ip());
 				$license->set_ip($event['newip'])->save();
-				$event['status'] = 'ok';
-				$event['status_text'] = 'The IP Address has been changed.';
 			}
 			$event->stopPropagation();
 		}
