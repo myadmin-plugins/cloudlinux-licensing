@@ -2,7 +2,7 @@
 
 namespace Detain\MyAdminCloudlinux;
 
-use Detain\Cloudlinux\Cloudlinux;
+//use Detain\Cloudlinux\Cloudlinux;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
