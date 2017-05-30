@@ -92,7 +92,7 @@ class Plugin {
 		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link($module, 'choice=none.reusable_cloudlinux', 'icons/database_warning_48.png', 'ReUsable Cloudlinux Licenses');
 			$menu->add_link($module, 'choice=none.cloudlinux_list', 'icons/database_warning_48.png', 'Cloudlinux Licenses Breakdown');
-			$menu->add_link('licensesapi', 'choice=none.cloudlinux_licenses_list', 'whm/createacct.gif', 'List all Cloudlinux Licenses');
+			$menu->add_link($module.'api', 'choice=none.cloudlinux_licenses_list', 'whm/createacct.gif', 'List all Cloudlinux Licenses');
 		}
 	}
 
