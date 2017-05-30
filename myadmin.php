@@ -12,9 +12,11 @@ return [
 	'author' => 'detain@interserver.net',
 	'home' => 'https://github.com/detain/myadmin-cloudlinux-licensing',
 	'repo' => 'https://github.com/detain/myadmin-cloudlinux-licensing',
-	'version' => '1.0.0',
+	'version' => '1.0.1',
 	'type' => 'licenses',
 	'hooks' => [
+		'plugin.install' => ['Detain\MyAdminCloudlinux\Plugin', 'Install'],
+		'plugin.uninstall' => ['Detain\MyAdminCloudlinux\Plugin', 'Uninstall'],
 		'licenses.settings' => ['Detain\MyAdminCloudlinux\Plugin', 'Settings'],
 		'licenses.activate' => ['Detain\MyAdminCloudlinux\Plugin', 'Activate'],
 		'licenses.deactivate' => ['Detain\MyAdminCloudlinux\Plugin', 'Deactivate'],

@@ -10,6 +10,19 @@ class Plugin {
 	public function __construct() {
 	}
 
+	public static function Install(GenericEvent $event) {
+		$plugin = $event->getSubject();
+		$service_category = $plugin->add_service_category('licenses', 'cloudlinux', 'CloudLinux');
+		$plugin->define('SERVICE_TYPES_CLOUDLINUX', $service_category);
+		$service_type = $plugin->add_service_type($service_category, 'licenses', 'CloudLinux');
+		$plugin->add_service($service_category, $service_type, 'licenses', 'CloudLinux License', 10.00, 0, 1, 1, '');
+		$plugin->add_service($service_category, $service_type, 'licenses', 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
+		$plugin->add_service($service_category, $service_type, 'licenses', 'KernelCare License', 2.95, 0, 1, 16, '');
+	}
+
+	public static function Uninstall(GenericEvent $event) {
+	}
+
 	public static function Activate(GenericEvent $event) {
 		// will be executed when the licenses.license event is dispatched
 		$license = $event->getSubject();
