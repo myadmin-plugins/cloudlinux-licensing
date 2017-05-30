@@ -6,7 +6,7 @@
 */
 return [
 	'name' => 'Cloudlinux Licensing',
-	'description' => 'Allows selling of Cloudlinux Server and VPS License Types.  More info at https://www.netenberg.com/cloudlinux.php',
+	'description' => 'Allows selling of Cloudlinux Server and VPS License Types.  More info at https://www.cloudlinux.com/',
 	'help' => 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a cloudlinux license. Allow 10 minutes for activation.',
 	'module' => 'licenses',
 	'author' => 'detain@interserver.net',
