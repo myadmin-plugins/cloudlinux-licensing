@@ -90,27 +90,18 @@ class Plugin {
 		$menu = $event->getSubject();
 		$module = 'licenses';
 		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link($module, 'choice=none.reusable_cloudlinux', 'icons/database_warning_48.png', 'ReUsable Cloudlinux Licenses');
-			$menu->add_link($module, 'choice=none.cloudlinux_list', 'icons/database_warning_48.png', 'Cloudlinux Licenses Breakdown');
-			$menu->add_link($module.'api', 'choice=none.cloudlinux_licenses_list', 'whm/createacct.gif', 'List all Cloudlinux Licenses');
+			$menu->add_link($module.'api', 'choice=none.cloudlinux_licenses_list', 'whm/createacct.gif', 'List all CloudLinux Licenses');
 		}
 	}
 
 	public static function Requirements(GenericEvent $event) {
 		// will be executed when the licenses.loader event is dispatched
 		$loader = $event->getSubject();
-		$loader->add_requirement('crud_cloudlinux_list', '/../vendor/detain/crud/src/crud/crud_cloudlinux_list.php');
-		$loader->add_requirement('crud_reusable_cloudlinux', '/../vendor/detain/crud/src/crud/crud_reusable_cloudlinux.php');
-		$loader->add_requirement('get_cloudlinux_licenses', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('get_cloudlinux_list', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('cloudlinux_licenses_list', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('cloudlinux_list', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('get_available_cloudlinux', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('activate_cloudlinux', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('get_reusable_cloudlinux', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('reusable_cloudlinux', '/licenses/cloudlinux.functions.inc.php');
-		$loader->add_requirement('class.cloudlinux', '/../vendor/detain/cloudlinux/class.cloudlinux.inc.php');
-		$loader->add_requirement('vps_add_cloudlinux', '/vps/addons/vps_add_cloudlinux.php');
+		$loader->add_requirement('class.Cloudlinux', '/../vendor/detain/cloudlinux-licensing/src/Cloudlinux.php');
+		$loader->add_requirement('cloudlinux_licenses_list', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux_licenses_list.php');
+		$loader->add_requirement('deactivate_kcare', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
+		$loader->add_requirement('deactivate_cloudlinux', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
+		$loader->add_requirement('get_cloudlinux_licenses', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
 	}
 
 	public static function Settings(GenericEvent $event) {
