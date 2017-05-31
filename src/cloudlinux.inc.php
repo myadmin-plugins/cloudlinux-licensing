@@ -12,6 +12,8 @@
  * @category Licenses
  */
 
+use Detain\Cloudlinux\Cloudlinux; 
+
 /**
  * returns a list of the cloudlinux licenses
  * @return bool|mixed

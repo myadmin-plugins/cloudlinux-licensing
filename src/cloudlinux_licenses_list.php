@@ -12,6 +12,8 @@
  * @category Licenses
  */
 
+use Detain\Cloudlinux\Cloudlinux; 
+
 function cloudlinux_licenses_list() {
 	if ($GLOBALS['tf']->ima == 'admin') {
 		$table = new TFTable;
