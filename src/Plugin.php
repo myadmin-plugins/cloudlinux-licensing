@@ -4,6 +4,7 @@ namespace Detain\MyAdminCloudlinux;
 
 use Detain\Cloudlinux\Cloudlinux;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use MyAdmin\Settings;
 
 class Plugin {
 
@@ -107,9 +108,9 @@ class Plugin {
 	public static function Settings(GenericEvent $event) {
 		// will be executed when the licenses.settings event is dispatched
 		$settings = $event->getSubject();
-		$settings->add_text_setting('licenses', 'apisettings', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', $settings->get_setting('CLOUDLINUX_LOGIN'));
-		$settings->add_text_setting('licenses', 'apisettings', 'cloudlinux_key', 'Cloudlinux Key:', 'Cloudlinux Key', $settings->get_setting('CLOUDLINUX_KEY'));
-		$settings->add_dropdown_setting('licenses', 'stock', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_CLOUDLINUX'), array('0', '1'), array('No', 'Yes', ));
+		$settings->add_text_setting('licenses', 'Cloudlinux', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', CLOUDLINUX_LOGIN);
+		$settings->add_text_setting('licenses', 'Cloudlinux', 'cloudlinux_key', 'Cloudlinux Key:', 'Cloudlinux Key', CLOUDLINUX_KEY);
+		$settings->add_dropdown_setting('licenses', 'Cloudlinux', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', OUTOFSTOCK_LICENSES_CLOUDLINUX, array('0', '1'), array('No', 'Yes'));
 	}
 
 }
