@@ -13,7 +13,7 @@ return [
 	'home' => 'https://github.com/detain/myadmin-cloudlinux-licensing',
 	'repo' => 'https://github.com/detain/myadmin-cloudlinux-licensing',
 	'version' => '1.0.1',
-	'type' => 'licenses',
+	'type' => 'service',
 	'hooks' => [
 		'plugin.install' => ['Detain\MyAdminCloudlinux\Plugin', 'Install'],
 		'plugin.uninstall' => ['Detain\MyAdminCloudlinux\Plugin', 'Uninstall'],
