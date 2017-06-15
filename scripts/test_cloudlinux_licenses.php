@@ -9,7 +9,7 @@ define('VERBOSE_MODE', false);
 global $console;
 
 $cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-$response = $cl->is_licensed('206.72.198.90', true);
+$response = $cl->isLicensed('206.72.198.90', true);
 print_r($response);
 if (!$response)
 {

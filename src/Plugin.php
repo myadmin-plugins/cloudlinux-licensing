@@ -30,7 +30,7 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log('licenses', 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-			$response = $cl->is_licensed($license->get_ip(), true);
+			$response = $cl->isLicensed($license->get_ip(), true);
 			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 				$response = $cl->license($license->get_ip(), $event['field1']);
@@ -66,7 +66,7 @@ class Plugin {
 				$event['status'] = 'error';
 				$event['status_text'] = 'Error removing the old license.';
 			} else {
-				$response = $cl->is_licensed($event['newip'], true);
+				$response = $cl->isLicensed($event['newip'], true);
 				myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 				if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 					$response = $cl->license($event['newip'], $event['field1']);

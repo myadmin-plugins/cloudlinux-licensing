@@ -20,8 +20,8 @@ use Detain\Cloudlinux\Cloudlinux;
  */
 function get_cloudlinux_licenses() {
 	$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-	$licenses = $cl->license_list();
-	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'license_list', '', $licenses);
+	$licenses = $cl->licenseList();
+	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'licenseList', '', $licenses);
 	return $licenses;
 }
 
