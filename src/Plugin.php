@@ -46,7 +46,7 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log('licenses', 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_cloudlinux');
-			deactivate_cloudlinux($license->get_ip(), $service_types[$license->get_type()]['services_field1']);
+			deactivate_cloudlinux($license->get_ip(), $event['field1']);
 			$event->stopPropagation();
 		}
 	}
