@@ -58,7 +58,7 @@ class Plugin {
 			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
 			function_requirements('class.cloudlinux');
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-			$response = $cl->remove_license($license->get_ip(), $event['field1']);
+			$response = $cl->removeLicense($license->get_ip(), $event['field1']);
 			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			$event['status'] = 'ok';
 			$event['status_text'] = 'The IP Address has been changed.';
