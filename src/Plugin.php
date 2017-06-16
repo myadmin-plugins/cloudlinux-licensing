@@ -20,14 +20,14 @@ class Plugin {
 
 	public static function Hooks() {
 		return [
-			'plugin.install' => ['Detain\MyAdminCloudlinux\Plugin', 'Install'],
-			'plugin.uninstall' => ['Detain\MyAdminCloudlinux\Plugin', 'Uninstall'],
-			'licenses.settings' => ['Detain\MyAdminCloudlinux\Plugin', 'Settings'],
-			'licenses.activate' => ['Detain\MyAdminCloudlinux\Plugin', 'Activate'],
-			'licenses.deactivate' => ['Detain\MyAdminCloudlinux\Plugin', 'Deactivate'],
-			'licenses.change_ip' => ['Detain\MyAdminCloudlinux\Plugin', 'ChangeIp'],
-			'function.requirements' => ['Detain\MyAdminCloudlinux\Plugin', 'Requirements'],
-			'ui.menu' => ['Detain\MyAdminCloudlinux\Plugin', 'Menu'],
+			'plugin.install' => [__CLASS__, 'Install'],
+			'plugin.uninstall' => [__CLASS__, 'Uninstall'],
+			'licenses.settings' => [__CLASS__, 'Settings'],
+			'licenses.activate' => [__CLASS__, 'Activate'],
+			'licenses.deactivate' => [__CLASS__, 'Deactivate'],
+			'licenses.change_ip' => [__CLASS__, 'ChangeIp'],
+			'function.requirements' => [__CLASS__, 'Requirements'],
+			'ui.menu' => [__CLASS__, 'Menu'],
 		];
 	}
 
