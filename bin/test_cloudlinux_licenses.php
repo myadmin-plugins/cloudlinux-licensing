@@ -1,4 +1,3 @@
-#!/usr/bin/php -q
 <?php
 use Detain\Cloudlinux\Cloudlinux; 
 ini_set('display_errors', 'on');
