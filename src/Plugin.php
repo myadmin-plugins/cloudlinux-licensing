@@ -33,12 +33,12 @@ class Plugin {
 
 	public static function Install(GenericEvent $event) {
 		$plugin = $event->getSubject();
-		$service_category = $plugin->add_service_category('licenses', 'cloudlinux', 'CloudLinux');
-		$plugin->define('SERVICE_TYPES_CLOUDLINUX', $service_category);
-		$service_type = $plugin->add_service_type($service_category, 'licenses', 'CloudLinux');
-		$plugin->add_service($service_category, $service_type, 'licenses', 'CloudLinux License', 10.00, 0, 1, 1, '');
-		$plugin->add_service($service_category, $service_type, 'licenses', 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
-		$plugin->add_service($service_category, $service_type, 'licenses', 'KernelCare License', 2.95, 0, 1, 16, '');
+		$serviceCategory = $plugin->add_service_category('licenses', 'cloudlinux', 'CloudLinux');
+		$plugin->define('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
+		$serviceType = $plugin->add_service_type($serviceCategory, 'licenses', 'CloudLinux');
+		$plugin->add_service($serviceCategory, $serviceType, 'licenses', 'CloudLinux License', 10.00, 0, 1, 1, '');
+		$plugin->add_service($serviceCategory, $serviceType, 'licenses', 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
+		$plugin->add_service($serviceCategory, $serviceType, 'licenses', 'KernelCare License', 2.95, 0, 1, 16, '');
 	}
 
 	public static function Uninstall(GenericEvent $event) {
