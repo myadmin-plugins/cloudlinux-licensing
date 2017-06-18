@@ -18,7 +18,7 @@ class Plugin {
 	public function __construct() {
 	}
 
-	public static function Hooks() {
+	public static function getHooks() {
 		return [
 			'plugin.install' => [__CLASS__, 'Install'],
 			'plugin.uninstall' => [__CLASS__, 'Uninstall'],
