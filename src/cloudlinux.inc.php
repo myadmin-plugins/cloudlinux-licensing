@@ -27,26 +27,26 @@ function get_cloudlinux_licenses() {
 
 /**
  * deactivatges a cloudlinux licenes
- * @param string $ip ip address to deactivate
+ * @param string $ipAddress ip address to deactivate
  * @param bool $type type of the lice4nse, can be 1 2 16 or leave blank/false for all types on that ip
  */
-function deactivate_cloudlinux($ip, $type = false) {
-	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ip}, {$type}) called", __LINE__, __FILE__);
+function deactivate_cloudlinux($ipAddress, $type = false) {
+	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) called", __LINE__, __FILE__);
 	$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 	//myadmin_log('cloudlinux', 'info', json_encode($cl->xml_client), __LINE__, __FILE__);
 	if ($type == false) {
-		$response = $cl->remove($ip);
+		$response = $cl->remove($ipAddress);
 	} else {
-		$response = $cl->remove($ip, $type);
+		$response = $cl->remove($ipAddress, $type);
 	}
-	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'removeLicense', array($ip, $type), $response);
-	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ip}, {$type}) Resposne: " . json_encode($response), __LINE__, __FILE__);
+	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'removeLicense', array($ipAddress, $type), $response);
+	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) Resposne: " . json_encode($response), __LINE__, __FILE__);
 }
 
 /**
  * deactivates a kernelcare lciense
- * @param $ip ip address to deactivate
+ * @param $ipAddress ip address to deactivate
  */
-function deactivate_kcare($ip) {
-	deactivate_cloudlinux($ip, 16);
+function deactivate_kcare($ipAddress) {
+	deactivate_cloudlinux($ipAddress, 16);
 }
