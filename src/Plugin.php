@@ -60,7 +60,7 @@ class Plugin {
 		}
 	}
 
-	public static function getgetDeactivate(GenericEvent $event) {
+	public static function getDeactivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
