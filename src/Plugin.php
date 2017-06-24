@@ -23,7 +23,7 @@ class Plugin {
 			'plugin.install' => [__CLASS__, 'Install'],
 			'plugin.uninstall' => [__CLASS__, 'Uninstall'],
 			'licenses.settings' => [__CLASS__, 'getSettings'],
-			'licenses.activate' => [__CLASS__, 'Activate'],
+			'licenses.activate' => [__CLASS__, 'getActivate'],
 			'licenses.deactivate' => [__CLASS__, 'Deactivate'],
 			'licenses.change_ip' => [__CLASS__, 'ChangeIp'],
 			'function.requirements' => [__CLASS__, 'getRequirements'],
@@ -44,7 +44,7 @@ class Plugin {
 	public static function Uninstall(GenericEvent $event) {
 	}
 
-	public static function Activate(GenericEvent $event) {
+	public static function getActivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log('licenses', 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
