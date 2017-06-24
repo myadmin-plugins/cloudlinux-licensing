@@ -22,10 +22,10 @@ class Plugin {
 		return [
 			'plugin.install' => [__CLASS__, 'Install'],
 			'plugin.uninstall' => [__CLASS__, 'Uninstall'],
-			'licenses.settings' => [__CLASS__, 'getSettings'],
-			'licenses.activate' => [__CLASS__, 'getActivate'],
-			'licenses.deactivate' => [__CLASS__, 'Deactivate'],
-			'licenses.change_ip' => [__CLASS__, 'ChangeIp'],
+			self::$module.'.settings' => [__CLASS__, 'getSettings'],
+			self::$module.'.activate' => [__CLASS__, 'getActivate'],
+			self::$module.'.deactivate' => [__CLASS__, 'Deactivate'],
+			self::$module.'.change_ip' => [__CLASS__, 'ChangeIp'],
 			'function.requirements' => [__CLASS__, 'getRequirements'],
 			'ui.menu' => [__CLASS__, 'getMenu'],
 		];
@@ -33,12 +33,12 @@ class Plugin {
 
 	public static function Install(GenericEvent $event) {
 		$plugin = $event->getSubject();
-		$serviceCategory = $plugin->add_service_category('licenses', 'cloudlinux', 'CloudLinux');
+		$serviceCategory = $plugin->add_service_category(self::$module, 'cloudlinux', 'CloudLinux');
 		$plugin->define('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
-		$serviceType = $plugin->add_service_type($serviceCategory, 'licenses', 'CloudLinux');
-		$plugin->add_service($serviceCategory, $serviceType, 'licenses', 'CloudLinux License', 10.00, 0, 1, 1, '');
-		$plugin->add_service($serviceCategory, $serviceType, 'licenses', 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
-		$plugin->add_service($serviceCategory, $serviceType, 'licenses', 'KernelCare License', 2.95, 0, 1, 16, '');
+		$serviceType = $plugin->add_service_type($serviceCategory, self::$module, 'CloudLinux');
+		$plugin->add_service($serviceCategory, $serviceType, self::$module, 'CloudLinux License', 10.00, 0, 1, 1, '');
+		$plugin->add_service($serviceCategory, $serviceType, self::$module, 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
+		$plugin->add_service($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
 	}
 
 	public static function Uninstall(GenericEvent $event) {
@@ -47,14 +47,14 @@ class Plugin {
 	public static function getActivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
-			myadmin_log('licenses', 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->isLicensed($license->get_ip(), true);
-			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 				$response = $cl->license($license->get_ip(), $event['field1']);
 				//$serviceExtra = $response['mainKeyNumber'] . ',' . $response['productKey'];
-				myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+				myadmin_log(self::$module, 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			}
 			$event->stopPropagation();
 		}
@@ -63,7 +63,7 @@ class Plugin {
 	public static function Deactivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
-			myadmin_log('licenses', 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_cloudlinux');
 			deactivate_cloudlinux($license->get_ip(), $event['field1']);
 			$event->stopPropagation();
@@ -73,12 +73,12 @@ class Plugin {
 	public static function ChangeIp(GenericEvent $event) {
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			$license = $event->getSubject();
-			$settings = get_module_settings('licenses');
-			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			$settings = get_module_settings(self::$module);
+			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
 			function_requirements('class.cloudlinux');
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->removeLicense($license->get_ip(), $event['field1']);
-			myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 			$event['status'] = 'ok';
 			$event['status_text'] = 'The IP Address has been changed.';
 			if ($response === false) {
@@ -86,11 +86,11 @@ class Plugin {
 				$event['status_text'] = 'Error removing the old license.';
 			} else {
 				$response = $cl->isLicensed($event['newip'], true);
-				myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+				myadmin_log(self::$module, 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 				if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 					$response = $cl->license($event['newip'], $event['field1']);
 					//$serviceExtra = $response['mainKeyNumber'] . ',' . $response['productKey'];
-					myadmin_log('licenses', 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
+					myadmin_log(self::$module, 'info', 'Response: ' . json_encode($response), __LINE__, __FILE__);
 					if ($response === false) {
 						$event['status'] = 'error';
 						$event['status_text'] = 'Error Licensign the new IP.';
@@ -107,7 +107,7 @@ class Plugin {
 
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
-		$module = 'licenses';
+		$module = self::$module;
 		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link($module.'api', 'choice=none.cloudlinux_licenses_list', 'whm/createacct.gif', 'List all CloudLinux Licenses');
 		}
@@ -124,9 +124,9 @@ class Plugin {
 
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
-		$settings->add_text_setting('licenses', 'Cloudlinux', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', CLOUDLINUX_LOGIN);
-		$settings->add_text_setting('licenses', 'Cloudlinux', 'cloudlinux_key', 'Cloudlinux Key:', 'Cloudlinux Key', CLOUDLINUX_KEY);
-		$settings->add_dropdown_setting('licenses', 'Cloudlinux', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', OUTOFSTOCK_LICENSES_CLOUDLINUX, array('0', '1'), array('No', 'Yes'));
+		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', CLOUDLINUX_LOGIN);
+		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_key', 'Cloudlinux Key:', 'Cloudlinux Key', CLOUDLINUX_KEY);
+		$settings->add_dropdown_setting(self::$module, 'Cloudlinux', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', OUTOFSTOCK_LICENSES_CLOUDLINUX, array('0', '1'), array('No', 'Yes'));
 	}
 
 }
