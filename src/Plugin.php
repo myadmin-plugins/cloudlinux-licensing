@@ -53,7 +53,7 @@ class Plugin {
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 				$response = $cl->license($license->get_ip(), $event['field1']);
-				//$serviceExtra = $response['mainKeyNumber'] . ','.$response['productKey'];
+				//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			}
 			$event->stopPropagation();
@@ -89,7 +89,7 @@ class Plugin {
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 				if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 					$response = $cl->license($event['newip'], $event['field1']);
-					//$serviceExtra = $response['mainKeyNumber'] . ','.$response['productKey'];
+					//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
 					myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 					if ($response === FALSE) {
 						$event['status'] = 'error';
