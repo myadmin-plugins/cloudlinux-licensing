@@ -19,4 +19,4 @@ if (!$response) {
 
 echo "List of All Licnses:\n";
 foreach ($cl->reconcile() as $license)
-	echo $license['IP'].' is type '.$license['TYPE'].'. server registered in CLN with license: '.var_export($license['REGISTERED'], TRUE)."\n";
+	echo $license['IP'].' is type '.$license['TYPE'].'. server registered in CLN with license: '.var_export($license['REGISTERED'], TRUE).PHP_EOL;
