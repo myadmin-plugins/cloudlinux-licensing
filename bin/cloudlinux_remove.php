@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 use Detain\Cloudlinux\Cloudlinux; 
-require_once(__DIR__.'/../../../include/functions.inc.php');
+require_once(__DIR__.'/../../../../include/functions.inc.php');
 
 $cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 if (isset($_SERVER['argv'][2]))
