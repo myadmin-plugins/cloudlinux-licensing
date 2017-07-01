@@ -5,12 +5,12 @@ $license_type = 16;
 ///home/my/files/CloudLinux/php/clnreg.kcare-check.php
 $cl_login = CLOUDLINUX_LOGIN;
 $secret_key = CLOUDLINUX_KEY;
-$IP = $argv[1];
+$ipAddress = $argv[1];
 $now = time();
 $sha1hash = sha1("$secret_key$now");
 $auth_token = "$cl_login|$now|$sha1hash";
 
-$BODY = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <methodCall> <methodName>registration.license</methodName> <params> <param> <value>$auth_token</value> </param> <param> <value>$IP</value> </param> <param> <value><int>$license_type</int></value> </param></params> </methodCall>";
+$BODY = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <methodCall> <methodName>registration.license</methodName> <params> <param> <value>$auth_token</value> </param> <param> <value>$ipAddress</value> </param> <param> <value><int>$license_type</int></value> </param></params> </methodCall>";
 $context = stream_context_create(array(
 	 'http' => array(
 			 'method' => 'POST',
