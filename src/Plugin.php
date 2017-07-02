@@ -50,10 +50,10 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-			$response = $cl->isLicensed($serviceClass->get_ip(), TRUE);
+			$response = $cl->isLicensed($serviceClass->getIp(), TRUE);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
-				$response = $cl->license($serviceClass->get_ip(), $event['field1']);
+				$response = $cl->license($serviceClass->getIp(), $event['field1']);
 				//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			}
@@ -66,7 +66,7 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_cloudlinux');
-			deactivate_cloudlinux($serviceClass->get_ip(), $event['field1']);
+			deactivate_cloudlinux($serviceClass->getIp(), $event['field1']);
 			$event->stopPropagation();
 		}
 	}
@@ -75,10 +75,10 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
-			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$serviceClass->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$serviceClass->getIp().") (NEW:{$event['newip']})", __LINE__, __FILE__);
 			function_requirements('class.cloudlinux');
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-			$response = $cl->removeLicense($serviceClass->get_ip(), $event['field1']);
+			$response = $cl->removeLicense($serviceClass->getIp(), $event['field1']);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			$event['status'] = 'ok';
 			$event['status_text'] = 'The IP Address has been changed.';
@@ -99,7 +99,7 @@ class Plugin {
 				}
 			}
 			if ($event['status'] == 'ok') {
-				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->get_ip());
+				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getIp());
 				$serviceClass->set_ip($event['newip'])->save();
 			}
 			$event->stopPropagation();
