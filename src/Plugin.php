@@ -20,8 +20,8 @@ class Plugin {
 
 	public static function getHooks() {
 		return [
-			'plugin.install' => [__CLASS__, 'Install'],
-			'plugin.uninstall' => [__CLASS__, 'Uninstall'],
+			'plugin.install' => [__CLASS__, 'getInstall'],
+			'plugin.uninstall' => [__CLASS__, 'getUninstall'],
 			self::$module.'.settings' => [__CLASS__, 'getSettings'],
 			self::$module.'.activate' => [__CLASS__, 'getActivate'],
 			self::$module.'.reactivate' => [__CLASS__, 'getActivate'],
@@ -32,17 +32,19 @@ class Plugin {
 		];
 	}
 
-	public static function Install(GenericEvent $event) {
+	public static function getInstall(GenericEvent $event) {
 		$plugin = $event->getSubject();
-		$serviceCategory = $plugin->add_service_category(self::$module, 'cloudlinux', 'CloudLinux');
-		$plugin->define('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
-		$serviceType = $plugin->add_service_type($serviceCategory, self::$module, 'CloudLinux');
-		$plugin->add_service($serviceCategory, $serviceType, self::$module, 'CloudLinux License', 10.00, 0, 1, 1, '');
-		$plugin->add_service($serviceCategory, $serviceType, self::$module, 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
-		$plugin->add_service($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
+		$serviceCategory = $plugin->addServiceCategory(self::$module, 'cloudlinux', 'CloudLinux');
+		$plugin->addDefine('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
+		$serviceType = $plugin->addServiceType($serviceCategory, self::$module, 'CloudLinux');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'CloudLinux License', 10.00, 0, 1, 1, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
 	}
 
-	public static function Uninstall(GenericEvent $event) {
+	public static function getUninstall(GenericEvent $event) {
+		$plugin = $event->getSubject();
+		$plugin->disableServiceCategory(self::$module, 'cloudlinux');
 	}
 
 	public static function getActivate(GenericEvent $event) {
@@ -108,7 +110,6 @@ class Plugin {
 
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
-		$module = self::$module;
 		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link(self::$module.'api', 'choice=none.cloudlinux_licenses_list', 'whm/createacct.gif', 'List all CloudLinux Licenses');
 		}

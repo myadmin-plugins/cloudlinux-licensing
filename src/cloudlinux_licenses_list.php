@@ -12,7 +12,7 @@
  * @category Licenses
  */
 
-use Detain\Cloudlinux\Cloudlinux; 
+use Detain\Cloudlinux\Cloudlinux;
 
 function cloudlinux_licenses_list() {
 	if ($GLOBALS['tf']->ima == 'admin') {
@@ -20,17 +20,18 @@ function cloudlinux_licenses_list() {
 		$table->set_title('CloudLinux License List');
 		$header = FALSE;
 		$licenses = obj2array(get_cloudlinux_licenses());
-		foreach ($licenses['data'] as $idx => $data) {
+		$licensesValues = array_values($licenses['data']);
+		foreach ($licensesValues as $data) {
 			if (!$header) {
-				foreach (array_keys($data) as $field) {
+				$dataKeys = array_keys($data);
+				foreach (array_keys($data) as $field)
 					$table->add_field(ucwords(str_replace('_', ' ', $field)));
-				}
 				$table->add_row();
 				$header = TRUE;
 			}
-			foreach ($data as $key => $field) {
+			$dataValues = array_values($data);
+			foreach ($dataValues as $field)
 				$table->add_field($field);
-			}
 			$table->add_row();
 		}
 		add_output($table->get_table());
