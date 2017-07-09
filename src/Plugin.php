@@ -128,7 +128,7 @@ class Plugin {
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', CLOUDLINUX_LOGIN);
 		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_key', 'Cloudlinux Key:', 'Cloudlinux Key', CLOUDLINUX_KEY);
-		$settings->add_dropdown_setting(self::$module, 'Cloudlinux', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', OUTOFSTOCK_LICENSES_CLOUDLINUX, array('0', '1'), array('No', 'Yes'));
+		$settings->add_dropdown_setting(self::$module, 'Cloudlinux', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', OUTOFSTOCK_LICENSES_CLOUDLINUX, ['0', '1'], ['No', 'Yes']);
 	}
 
 }
