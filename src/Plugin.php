@@ -50,7 +50,7 @@ class Plugin {
 
 	public static function getActivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
+		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->isLicensed($serviceClass->getIp(), TRUE);
@@ -66,7 +66,7 @@ class Plugin {
 
 	public static function getDeactivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
+		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_cloudlinux');
 			deactivate_cloudlinux($serviceClass->getIp(), $event['field1']);
@@ -77,7 +77,7 @@ class Plugin {
 
 	public static function getDeactivateIp(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
+		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_cloudlinux');
 			deactivate_cloudlinux($serviceClass->getIp());
@@ -86,7 +86,7 @@ class Plugin {
 	}
 
 	public static function getChangeIp(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
+		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$serviceClass->getIp().") (NEW:{$event['newip']})", __LINE__, __FILE__);
