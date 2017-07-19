@@ -26,6 +26,7 @@ class Plugin {
 			self::$module.'.activate' => [__CLASS__, 'getActivate'],
 			self::$module.'.reactivate' => [__CLASS__, 'getActivate'],
 			self::$module.'.deactivate' => [__CLASS__, 'getDeactivate'],
+			self::$module.'.deactivate_ip' => [__CLASS__, 'getDeactivateIp'],
 			self::$module.'.change_ip' => [__CLASS__, 'getChangeIp'],
 			'function.requirements' => [__CLASS__, 'getRequirements'],
 			'ui.menu' => [__CLASS__, 'getMenu'],
@@ -69,6 +70,17 @@ class Plugin {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_cloudlinux');
 			deactivate_cloudlinux($serviceClass->getIp(), $event['field1']);
+			$event->stopPropagation();
+		}
+	}
+
+
+	public static function getDeactivateIp(GenericEvent $event) {
+		$serviceClass = $event->getSubject();
+		if ($event['category'] == SERVICE_TYPES_CLOUDLINUX) {
+			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
+			function_requirements('deactivate_cloudlinux');
+			deactivate_cloudlinux($serviceClass->getIp());
 			$event->stopPropagation();
 		}
 	}
