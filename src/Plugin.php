@@ -6,6 +6,11 @@ use Detain\Cloudlinux\Cloudlinux;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use MyAdmin\Settings;
 
+/**
+ * Class Plugin
+ *
+ * @package Detain\MyAdminCloudlinux
+ */
 class Plugin {
 
 	public static $name = 'Cloudlinux Licensing';
@@ -14,10 +19,15 @@ class Plugin {
 	public static $module = 'licenses';
 	public static $type = 'service';
 
-
+	/**
+	 * Plugin constructor.
+	 */
 	public function __construct() {
 	}
 
+	/**
+	 * @return array
+	 */
 	public static function getHooks() {
 		return [
 			'plugin.install' => [__CLASS__, 'getInstall'],
@@ -33,6 +43,9 @@ class Plugin {
 		];
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getInstall(GenericEvent $event) {
 		$plugin = $event->getSubject();
 		$serviceCategory = $plugin->addServiceCategory(self::$module, 'cloudlinux', 'CloudLinux');
@@ -43,11 +56,18 @@ class Plugin {
 		$plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getUninstall(GenericEvent $event) {
 		$plugin = $event->getSubject();
 		$plugin->disableServiceCategory(self::$module, 'cloudlinux');
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 * @throws \Detain\Cloudlinux\XmlRpcException
+	 */
 	public static function getActivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
@@ -64,6 +84,9 @@ class Plugin {
 		}
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getDeactivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
@@ -74,7 +97,9 @@ class Plugin {
 		}
 	}
 
-
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getDeactivateIp(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
@@ -85,6 +110,10 @@ class Plugin {
 		}
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 * @throws \Detain\Cloudlinux\XmlRpcException
+	 */
 	public static function getChangeIp(GenericEvent $event) {
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			$serviceClass = $event->getSubject();
@@ -120,6 +149,9 @@ class Plugin {
 		}
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
 		if ($GLOBALS['tf']->ima == 'admin') {
@@ -127,6 +159,9 @@ class Plugin {
 		}
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getRequirements(GenericEvent $event) {
 		$loader = $event->getSubject();
 		$loader->add_requirement('class.Cloudlinux', '/../vendor/detain/cloudlinux-licensing/src/Cloudlinux.php');
@@ -136,6 +171,9 @@ class Plugin {
 		$loader->add_requirement('get_cloudlinux_licenses', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
 	}
 
+	/**
+	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
+	 */
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', CLOUDLINUX_LOGIN);
