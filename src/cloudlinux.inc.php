@@ -11,11 +11,13 @@
  * @category Licenses
  */
 
-use Detain\Cloudlinux\Cloudlinux; 
+use Detain\Cloudlinux\Cloudlinux;
 
 /**
  * returns a list of the cloudlinux licenses
+ *
  * @return bool|mixed
+ * @throws \Detain\Cloudlinux\XmlRpcException
  */
 function get_cloudlinux_licenses() {
 	$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
