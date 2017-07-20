@@ -11,13 +11,15 @@ $sha1hash = sha1("$secret_key$now");
 $auth_token = "$cl_login|$now|$sha1hash";
 
 $BODY = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <methodCall> <methodName>registration.license</methodName> <params> <param> <value>$auth_token</value> </param> <param> <value>$ipAddress</value> </param> <param> <value><int>$license_type</int></value> </param></params> </methodCall>";
-$context = stream_context_create(array(
-	 'http' => array(
+$context = stream_context_create(
+	[
+	 'http' => [
 			 'method' => 'POST',
 			 'header' => 'Content-Type: application/xml; charset=UTF-8',
 			 'content' => $BODY
-			 )
-	 ));
+	 ]
+	]
+);
 
 $result = file_get_contents($url, FALSE, $context);
 if (mb_strpos($result, '<i4>0</i4>')) {

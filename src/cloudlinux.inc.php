@@ -40,7 +40,7 @@ function deactivate_cloudlinux($ipAddress, $type = FALSE) {
 	} else {
 		$response = $cl->remove($ipAddress, $type);
 	}
-	request_log('licenses', FALSE, __FUNCTION__, 'cloudlinux', 'removeLicense', array($ipAddress, $type), $response);
+	request_log('licenses', FALSE, __FUNCTION__, 'cloudlinux', 'removeLicense', [$ipAddress, $type], $response);
 	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) Resposne: ".json_encode($response), __LINE__, __FILE__);
 }
 
