@@ -1,8 +1,8 @@
 <?php
-use Detain\Cloudlinux\Cloudlinux; 
+use Detain\Cloudlinux\Cloudlinux;
 ini_set('display_errors', 'on');
-require_once(__DIR__.'/../../../../include/functions.inc.php');
-require_once(__DIR__.'/../../../include/licenses/Cloudlinux.php');
+require_once __DIR__.'/../../../../include/functions.inc.php';
+require_once __DIR__.'/../../../include/licenses/Cloudlinux.php';
 $webpage = FALSE;
 define('VERBOSE_MODE', FALSE);
 global $console;

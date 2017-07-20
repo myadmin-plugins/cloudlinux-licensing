@@ -1,5 +1,5 @@
 <?php
-require_once (__DIR__.'/../../../include/functions.inc.php');
+require_once __DIR__.'/../../../include/functions.inc.php';
 $url = 'https://cln.cloudlinux.com/clweb/xmlrpc';
 $license_type = 16;
 ///home/my/files/CloudLinux/php/clnreg.kcare-check.php
