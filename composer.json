@@ -1,35 +1,42 @@
 {
-    "name": "detain/myadmin-cloudlinux-licensing",
+    "name": "detain\/myadmin-cloudlinux-licensing",
     "type": "myadmin-plugin",
     "description": "Cloudlinux Licensing Class",
-    "keywords": ["cloudlinux","administration","license"],
+    "keywords": [
+        "cloudlinux",
+        "administration",
+        "license"
+    ],
     "license": "LGPL-2.1",
     "authors": [
         {
             "name": "Joe Huss",
-            "homepage": "https://my.interserver.net/"
+            "homepage": "https:\/\/my.interserver.net\/"
         }
     ],
     "config": {
-        "bin-dir": "vendor/bin",
+        "bin-dir": "vendor\/bin",
         "minimum-stability": "dev"
     },
     "require": {
         "php": ">=5.3.0",
-        "pear/xml_rpc2": "*",
+        "pear\/xml_rpc2": "*",
         "ext-curl": "*",
-        "symfony/event-dispatcher": "*",
-        "detain/myadmin-plugin-installer": "dev-master",
-        "detain/cloudlinux-licensing": "*"
+        "symfony\/event-dispatcher": "*",
+        "detain\/myadmin-plugin-installer": "dev-master",
+        "detain\/cloudlinux-licensing": "*",
+        "roave\/security-advisories": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "vlucas/phpdotenv": "*",
-        "codeclimate/php-test-reporter": "dev-master",
-        "satooshi/php-coveralls": "*",
-        "codacy/coverage": "dev-master"
+        "phpunit\/phpunit": "*",
+        "vlucas\/phpdotenv": "*",
+        "codeclimate\/php-test-reporter": "dev-master",
+        "satooshi\/php-coveralls": "*",
+        "codacy\/coverage": "dev-master"
     },
     "autoload": {
-        "psr-4": {"Detain\\MyAdminCloudlinux\\": "src/"}
+        "psr-4": {
+            "Detain\\MyAdminCloudlinux\\": "src\/"
+        }
     }
 }
