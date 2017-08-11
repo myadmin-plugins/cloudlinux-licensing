@@ -4,8 +4,7 @@
  *
  * API Documentation at: .. ill fill this in later from forum posts
  *
- * Last Changed: $LastChangedDate: 2017-05-26 04:36:01 -0400 (Fri, 26 May 2017) $
- * @author detain
+ * @author Joe Huss <detain@interserver.net>
  * @copyright 2017
  * @package MyAdmin
  * @category Licenses
