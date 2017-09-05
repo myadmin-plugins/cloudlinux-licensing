@@ -119,7 +119,7 @@ class Plugin {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			myadmin_log(self::$module, 'info', 'IP Change - (OLD:' .$serviceClass->getIp().") (NEW:{$event['newip']})", __LINE__, __FILE__);
-			function_requirements('class.cloudlinux');
+			function_requirements('class.Cloudlinux');
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->removeLicense($serviceClass->getIp(), $event['field1']);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
