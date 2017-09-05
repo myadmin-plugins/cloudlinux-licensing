@@ -154,9 +154,8 @@ class Plugin {
 	 */
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
-		if ($GLOBALS['tf']->ima == 'admin') {
+		if ($GLOBALS['tf']->ima == 'admin')
 			$menu->add_link(self::$module.'api', 'choice=none.cloudlinux_licenses_list', '/images/whm/createacct.gif', 'List all CloudLinux Licenses');
-		}
 	}
 
 	/**
