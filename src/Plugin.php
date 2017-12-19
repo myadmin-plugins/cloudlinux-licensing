@@ -79,6 +79,16 @@ class Plugin {
 				$response = $cl->license($serviceClass->getIp(), $event['field1']);
 				//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
+				if ($response === FALSE) {
+					$event['status'] = 'error';
+					$event['status_text'] = 'Error Licensing the new IP.';
+				} else {
+					$event['status'] = 'ok';
+					$event['status_text'] = 'The IP Address has been licensed.';
+				}
+			} else {
+				$event['status'] = 'ok';
+				$event['status_text'] = 'The IP Address was already licensed.';
 			}
 			$event->stopPropagation();
 		}
