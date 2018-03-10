@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 use Detain\Cloudlinux\Cloudlinux;
 require_once __DIR__.'/../../../../include/functions.inc.php';
