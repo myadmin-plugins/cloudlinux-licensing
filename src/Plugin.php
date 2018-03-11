@@ -128,7 +128,7 @@ class Plugin {
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
-			myadmin_log(self::$module, 'info', 'IP Change - OLD:' .$serviceClass->getIp()." NEW:{$event['newip']} Type:{$event['field1']}", __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'IP Change - OLD:'.$serviceClass->getIp()." NEW:{$event['newip']} Type:{$event['field1']}", __LINE__, __FILE__);
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 			$response = $cl->remove($serviceClass->getIp(), $event['field1']);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
