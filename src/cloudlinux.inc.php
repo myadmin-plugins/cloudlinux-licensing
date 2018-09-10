@@ -18,10 +18,11 @@ use Detain\Cloudlinux\Cloudlinux;
  * @return bool|mixed
  * @throws \Detain\Cloudlinux\XmlRpcException
  */
-function get_cloudlinux_licenses() {
+function get_cloudlinux_licenses()
+{
 	$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 	$licenses = $cl->licenseList();
-	request_log('licenses', FALSE, __FUNCTION__, 'cloudlinux', 'licenseList', '', $licenses);
+	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'licenseList', '', $licenses);
 	return $licenses;
 }
 
@@ -30,16 +31,17 @@ function get_cloudlinux_licenses() {
  * @param string $ipAddress ip address to deactivate
  * @param bool $type type of the lice4nse, can be 1 2 16 or leave blank/false for all types on that ip
  */
-function deactivate_cloudlinux($ipAddress, $type = FALSE) {
+function deactivate_cloudlinux($ipAddress, $type = false)
+{
 	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) called", __LINE__, __FILE__);
 	$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
 	//myadmin_log('cloudlinux', 'info', json_encode($cl->xml_client), __LINE__, __FILE__);
-	if ($type == FALSE) {
+	if ($type == false) {
 		$response = $cl->remove($ipAddress);
 	} else {
 		$response = $cl->remove($ipAddress, $type);
 	}
-	request_log('licenses', FALSE, __FUNCTION__, 'cloudlinux', 'removeLicense', [$ipAddress, $type], $response);
+	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'removeLicense', [$ipAddress, $type], $response);
 	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) Resposne: ".json_encode($response), __LINE__, __FILE__);
 }
 
@@ -47,6 +49,7 @@ function deactivate_cloudlinux($ipAddress, $type = FALSE) {
  * deactivates a kernelcare lciense
  * @param $ipAddress ip address to deactivate
  */
-function deactivate_kcare($ipAddress) {
+function deactivate_kcare($ipAddress)
+{
 	deactivate_cloudlinux($ipAddress, 16);
 }

@@ -21,7 +21,7 @@ $context = stream_context_create(
 	]
 );
 
-$result = file_get_contents($url, FALSE, $context);
+$result = file_get_contents($url, false, $context);
 if (mb_strpos($result, '<i4>0</i4>')) {
 	echo "Success Registering IP\n";
 } else {

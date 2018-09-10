@@ -11,8 +11,8 @@ use MyAdmin\Settings;
  *
  * @package Detain\MyAdminCloudlinux
  */
-class Plugin {
-
+class Plugin
+{
 	public static $name = 'Cloudlinux Licensing';
 	public static $description = 'Allows selling of Cloudlinux Server and VPS License Types.  More info at https://www.cloudlinux.com/';
 	public static $help = 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a cloudlinux license. Allow 10 minutes for activation.';
@@ -22,13 +22,15 @@ class Plugin {
 	/**
 	 * Plugin constructor.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 	}
 
 	/**
 	 * @return array
 	 */
-	public static function getHooks() {
+	public static function getHooks()
+	{
 		return [
 			'plugin.install' => [__CLASS__, 'getInstall'],
 			'plugin.uninstall' => [__CLASS__, 'getUninstall'],
@@ -46,7 +48,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getInstall(GenericEvent $event) {
+	public static function getInstall(GenericEvent $event)
+	{
 		$plugin = $event->getSubject();
 		$serviceCategory = $plugin->addServiceCategory(self::$module, 'cloudlinux', 'CloudLinux');
 		$plugin->addDefine('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
@@ -59,7 +62,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getUninstall(GenericEvent $event) {
+	public static function getUninstall(GenericEvent $event)
+	{
 		$plugin = $event->getSubject();
 		$plugin->disableServiceCategory(self::$module, 'cloudlinux');
 	}
@@ -68,18 +72,19 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 * @throws \Detain\Cloudlinux\XmlRpcException
 	 */
-	public static function getActivate(GenericEvent $event) {
+	public static function getActivate(GenericEvent $event)
+	{
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Activation', __LINE__, __FILE__);
 			$cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
-			$response = $cl->isLicensed($serviceClass->getIp(), TRUE);
+			$response = $cl->isLicensed($serviceClass->getIp(), true);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 				$response = $cl->license($serviceClass->getIp(), $event['field1']);
 				//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
-				if ($response === FALSE) {
+				if ($response === false) {
 					$event['status'] = 'error';
 					$event['status_text'] = 'Error Licensing the new IP.';
 				} else {
@@ -97,7 +102,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getDeactivate(GenericEvent $event) {
+	public static function getDeactivate(GenericEvent $event)
+	{
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
@@ -110,7 +116,8 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getDeactivateIp(GenericEvent $event) {
+	public static function getDeactivateIp(GenericEvent $event)
+	{
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__);
@@ -124,7 +131,8 @@ class Plugin {
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 * @throws \Detain\Cloudlinux\XmlRpcException
 	 */
-	public static function getChangeIp(GenericEvent $event) {
+	public static function getChangeIp(GenericEvent $event)
+	{
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
@@ -134,17 +142,17 @@ class Plugin {
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 			$event['status'] = 'ok';
 			$event['status_text'] = 'The IP Address has been changed.';
-			if ($response === FALSE) {
+			if ($response === false) {
 				$event['status'] = 'error';
 				$event['status_text'] = 'Error removing the old license.';
 			} else {
-				$response = $cl->isLicensed($event['newip'], TRUE);
+				$response = $cl->isLicensed($event['newip'], true);
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
 				if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 					$response = $cl->license($event['newip'], $event['field1']);
 					//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
 					myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
-					if ($response === FALSE) {
+					if ($response === false) {
 						$event['status'] = 'error';
 						$event['status_text'] = 'Error Licensing the new IP.';
 					}
@@ -161,16 +169,19 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getMenu(GenericEvent $event) {
+	public static function getMenu(GenericEvent $event)
+	{
 		$menu = $event->getSubject();
-		if ($GLOBALS['tf']->ima == 'admin')
+		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link(self::$module.'api', 'choice=none.cloudlinux_licenses_list', '/images/myadmin/list.png', 'List all CloudLinux Licenses');
+		}
 	}
 
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getRequirements(GenericEvent $event) {
+	public static function getRequirements(GenericEvent $event)
+	{
 		$loader = $event->getSubject();
 		$loader->add_page_requirement('cloudlinux_licenses_list', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux_licenses_list.php');
 		$loader->add_requirement('deactivate_kcare', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
@@ -181,11 +192,11 @@ class Plugin {
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-	public static function getSettings(GenericEvent $event) {
+	public static function getSettings(GenericEvent $event)
+	{
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_login', 'Cloudlinux Login:', 'Cloudlinux Login', CLOUDLINUX_LOGIN);
 		$settings->add_text_setting(self::$module, 'Cloudlinux', 'cloudlinux_key', 'Cloudlinux Key:', 'Cloudlinux Key', CLOUDLINUX_KEY);
 		$settings->add_dropdown_setting(self::$module, 'Cloudlinux', 'outofstock_licenses_cloudlinux', 'Out Of Stock CloudLinux Licenses', 'Enable/Disable Sales Of This Type', OUTOFSTOCK_LICENSES_CLOUDLINUX, ['0', '1'], ['No', 'Yes']);
 	}
-
 }
