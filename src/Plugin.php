@@ -183,10 +183,10 @@ class Plugin
 	public static function getRequirements(GenericEvent $event)
 	{
 		$loader = $event->getSubject();
-		$loader->add_page_requirement('cloudlinux_licenses_list', '/../vendor/detain/cloudlinux-licensing/src/cloudlinux_licenses_list.php');
-		$loader->add_requirement('deactivate_kcare', '/../vendor/detain/cloudlinux-licensing/src/cloudlinux.inc.php');
-		$loader->add_requirement('deactivate_cloudlinux', '/../vendor/detain/cloudlinux-licensing/src/cloudlinux.inc.php');
-		$loader->add_requirement('get_cloudlinux_licenses', '/../vendor/detain/cloudlinux-licensing/src/cloudlinux.inc.php');
+		$loader->add_page_requirement('cloudlinux_licenses_list', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux_licenses_list.php');
+		$loader->add_requirement('deactivate_kcare', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
+		$loader->add_requirement('deactivate_cloudlinux', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
+		$loader->add_requirement('get_cloudlinux_licenses', '/../vendor/detain/myadmin-cloudlinux-licensing/src/cloudlinux.inc.php');
 	}
 
 	/**

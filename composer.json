@@ -1,5 +1,5 @@
 {
-	"name": "detain/cloudlinux-licensing",
+	"name": "detain/myadmin-cloudlinux-licensing",
 	"type": "myadmin-plugin",
 	"description": "Cloudlinux Licensing Class",
 	"keywords": [
@@ -24,7 +24,7 @@
 		"ext-curl": "*",
 		"symfony/event-dispatcher": ">=2.8.26",
 		"detain/myadmin-plugin-installer": "dev-master",
-		"detain/cloudlinux-licensing": "dev-master",
+		"detain/myadmin-cloudlinux-licensing": "dev-master",
 		"roave/security-advisories": "dev-master"
 	},
 	"require-dev": {
