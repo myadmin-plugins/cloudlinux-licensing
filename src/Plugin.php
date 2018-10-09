@@ -159,7 +159,7 @@ class Plugin
 				}
 			}
 			if ($event['status'] == 'ok') {
-				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getIp());
+				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
 				$serviceClass->set_ip($event['newip'])->save();
 			}
 			$event->stopPropagation();
