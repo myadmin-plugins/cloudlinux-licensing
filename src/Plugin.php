@@ -173,7 +173,7 @@ class Plugin
     {
         $menu = $event->getSubject();
         if ($GLOBALS['tf']->ima == 'admin') {
-            $menu->add_link(self::$module.'api', 'choice=none.cloudlinux_licenses_list', '/images/myadmin/list.png', __('List all CloudLinux Licenses'));
+            $menu->add_link(self::$module.'api', 'choice=none.cloudlinux_licenses_list', '/images/myadmin/list.png', _('List all CloudLinux Licenses'));
         }
     }
 
@@ -201,8 +201,8 @@ class Plugin
          * @var \MyAdmin\Settings $settings
          **/
         $settings = $event->getSubject();
-        $settings->add_text_setting(self::$module, __('Cloudlinux'), 'cloudlinux_login', __('Cloudlinux Login'), __('Cloudlinux Login'), CLOUDLINUX_LOGIN);
-        $settings->add_text_setting(self::$module, __('Cloudlinux'), 'cloudlinux_key', __('Cloudlinux Key'), __('Cloudlinux Key'), CLOUDLINUX_KEY);
-        $settings->add_dropdown_setting(self::$module, __('Cloudlinux'), 'outofstock_licenses_cloudlinux', __('Out Of Stock CloudLinux Licenses'), __('Enable/Disable Sales Of This Type'), OUTOFSTOCK_LICENSES_CLOUDLINUX, ['0', '1'], ['No', 'Yes']);
+        $settings->add_text_setting(self::$module, _('Cloudlinux'), 'cloudlinux_login', _('Cloudlinux Login'), _('Cloudlinux Login'), CLOUDLINUX_LOGIN);
+        $settings->add_text_setting(self::$module, _('Cloudlinux'), 'cloudlinux_key', _('Cloudlinux Key'), _('Cloudlinux Key'), CLOUDLINUX_KEY);
+        $settings->add_dropdown_setting(self::$module, _('Cloudlinux'), 'outofstock_licenses_cloudlinux', _('Out Of Stock CloudLinux Licenses'), _('Enable/Disable Sales Of This Type'), OUTOFSTOCK_LICENSES_CLOUDLINUX, ['0', '1'], ['No', 'Yes']);
     }
 }
