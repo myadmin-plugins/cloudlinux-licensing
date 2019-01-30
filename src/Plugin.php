@@ -83,6 +83,7 @@ class Plugin
             if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
                 $response = $cl->license($serviceClass->getIp(), $event['field1']);
                 //$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
+                request_log(self::$module, $GLOBALS['tf']->session->account_id, __FUNCTION__, 'cloudlinux', 'license', [$serviceClass->getIp(), $event['field1']], $response);
                 myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__);
                 if ($response === false) {
                     $event['status'] = 'error';
