@@ -152,7 +152,7 @@ class Plugin
                 if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
                     $response = $cl->license($event['newip'], $event['field1']);
                     //$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
-                    myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__, self::$module);
+                    myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__, self::$module, $serviceClass->getId());
                     if ($response === false) {
                         $event['status'] = 'error';
                         $event['status_text'] = 'Error Licensing the new IP.';
