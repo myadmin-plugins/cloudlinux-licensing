@@ -55,8 +55,12 @@ class Plugin
 		$plugin->addDefine('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
 		$serviceType = $plugin->addServiceType($serviceCategory, self::$module, 'CloudLinux');
 		$plugin->addService($serviceCategory, $serviceType, self::$module, 'CloudLinux License', 10.00, 0, 1, 1, '');
-		$plugin->addService($serviceCategory, $serviceType, self::$module, 'CloudLinux Type2 License', 11.95, 0, 1, 2, '');
-		$plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
+        $plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
+        $plugin->addService($serviceCategory, $serviceType, self::$module, 'ImunityAV+', 6, 0, 1, 40, '');
+        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 single user', 12, 0, 1, 41, '');
+        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 30 users', 25, 0, 1, 42, '');
+        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 250 users', 35, 0, 1, 43, '');
+        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 unlimited users', 45, 0, 1, 49, '');
 	}
 
 	/**
