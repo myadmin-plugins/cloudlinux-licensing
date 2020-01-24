@@ -55,12 +55,12 @@ class Plugin
 		$plugin->addDefine('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
 		$serviceType = $plugin->addServiceType($serviceCategory, self::$module, 'CloudLinux');
 		$plugin->addService($serviceCategory, $serviceType, self::$module, 'CloudLinux License', 10.00, 0, 1, 1, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'ImunityAV+', 6, 0, 1, 40, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 single user', 12, 0, 1, 41, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 30 users', 25, 0, 1, 42, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 250 users', 35, 0, 1, 43, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 unlimited users', 45, 0, 1, 49, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'ImunityAV+', 6, 0, 1, 40, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 single user', 12, 0, 1, 41, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 30 users', 25, 0, 1, 42, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 250 users', 35, 0, 1, 43, '');
+		$plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 unlimited users', 45, 0, 1, 49, '');
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Plugin
 			if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
 				$response = $cl->license($serviceClass->getIp(), $event['field1']);
 				//$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
-				request_log(self::$module, $GLOBALS['tf']->session->account_id, __FUNCTION__, 'cloudlinux', 'license', [$serviceClass->getIp(), $event['field1']], $response);
+				request_log(self::$module, $GLOBALS['tf']->session->account_id, __FUNCTION__, 'cloudlinux', 'license', [$serviceClass->getIp(), $event['field1']], $response, $serviceClass->getId());
 				myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__, self::$module, $serviceClass->getId());
 				if ($response === false) {
 					$event['status'] = 'error';
