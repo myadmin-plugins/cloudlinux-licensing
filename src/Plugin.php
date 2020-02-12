@@ -113,7 +113,7 @@ class Plugin
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
 			function_requirements('deactivate_cloudlinux');
-			deactivate_cloudlinux($serviceClass->getIp(), $event['field1']);
+			$event['success']= deactivate_cloudlinux($serviceClass->getIp(), $event['field1']);
 			$event->stopPropagation();
 		}
 	}
@@ -127,7 +127,7 @@ class Plugin
 		if ($event['category'] == get_service_define('CLOUDLINUX')) {
 			myadmin_log(self::$module, 'info', 'Cloudlinux Deactivation', __LINE__, __FILE__, self::$module, $serviceClass->getId());
 			function_requirements('deactivate_cloudlinux');
-			deactivate_cloudlinux($serviceClass->getIp());
+			$event['success']  = deactivate_cloudlinux($serviceClass->getIp());
 			$event->stopPropagation();
 		}
 	}

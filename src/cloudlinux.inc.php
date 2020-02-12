@@ -43,6 +43,7 @@ function deactivate_cloudlinux($ipAddress, $type = false)
 	}
 	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'removeLicense', [$ipAddress, $type], $response);
 	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) Resposne: ".json_encode($response), __LINE__, __FILE__);
+	return true;
 }
 
 /**
@@ -51,5 +52,5 @@ function deactivate_cloudlinux($ipAddress, $type = false)
  */
 function deactivate_kcare($ipAddress)
 {
-	deactivate_cloudlinux($ipAddress, 16);
+	return deactivate_cloudlinux($ipAddress, 16);
 }
