@@ -41,6 +41,17 @@ function deactivate_cloudlinux($ipAddress, $type = false)
 	} else {
 		$response = $cl->remove($ipAddress, $type);
 	}
+	if (!isset($response['success']) || $response['success'] !== true) {
+		$bodyRows = [];
+		$bodyRows[] = 'License IP: '.$ipAddress.' unable to deactivate.';
+		$bodyRows[] = 'Deactivation Response: .'.json_encode($response);
+		$subject = 'Cloudlinux License Deactivation Issue IP: '.$ipAddress;
+		$smartyE = new TFSmarty;
+		$smartyE->assign('h1', 'Cloudlinux License Deactivation');
+		$smartyE->assign('body_rows', $bodyRows);
+		$msg = $smartyE->fetch('email/client/client_email.tpl');
+		(new \MyAdmin\Mail())->multiMail($subject, $msg, ADMIN_EMAIL, 'client/client_email.tpl');
+	}
 	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'removeLicense', [$ipAddress, $type], $response);
 	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) Resposne: ".json_encode($response), __LINE__, __FILE__);
 	return true;
