@@ -50,7 +50,7 @@ function deactivate_cloudlinux($ipAddress, $type = false)
 		$smartyE->assign('h1', 'Cloudlinux License Deactivation');
 		$smartyE->assign('body_rows', $bodyRows);
 		$msg = $smartyE->fetch('email/client/client_email.tpl');
-		(new \MyAdmin\Mail())->multiMail($subject, $msg, ADMIN_EMAIL, 'client/client_email.tpl');
+		(new \MyAdmin\Mail())->multiMail($subject, $msg, false, 'client/client_email.tpl');
 	}
 	request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'removeLicense', [$ipAddress, $type], $response);
 	myadmin_log('cloudlinux', 'info', "Deactivate CloudLinux({$ipAddress}, {$type}) Resposne: ".json_encode($response), __LINE__, __FILE__);
