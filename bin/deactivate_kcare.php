@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__.'/../../../include/functions.inc.php';
 $url = 'https://cln.cloudlinux.com/clweb/xmlrpc';
 $license_type = 16;
@@ -12,20 +13,20 @@ $auth_token = "$cl_login|$now|$sha1hash";
 
 $BODY = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <methodCall> <methodName>registration.remove_license</methodName> <params> <param> <value>$auth_token</value> </param> <param> <value>$ipAddress</value> </param>  <param> <value><int>$license_type</int></value> </param></params> </methodCall>";
 $context = stream_context_create(
-	[
-	 'http' => [
-			 'method' => 'POST',
-			 'header' => 'Content-Type: application/xml; charset=UTF-8',
-			 'content' => $BODY
-	 ]
-	]
+    [
+     'http' => [
+             'method' => 'POST',
+             'header' => 'Content-Type: application/xml; charset=UTF-8',
+             'content' => $BODY
+     ]
+    ]
 );
 
 $result = file_get_contents($url, false, $context);
 if (mb_strpos($result, '<i4>1</i4>')) {
-	echo "Success Removing IP\n";
+    echo "Success Removing IP\n";
 } elseif (mb_strpos($result, '<i4>0</i4>')) {
-	echo "Success Removing IP\n";
+    echo "Success Removing IP\n";
 } else {
-	echo "Error Removing IP\n";
+    echo "Error Removing IP\n";
 }
