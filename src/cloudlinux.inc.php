@@ -22,7 +22,7 @@ function get_cloudlinux_licenses()
 {
     $cl = new Cloudlinux(CLOUDLINUX_LOGIN, CLOUDLINUX_KEY);
     $licenses = $cl->licenseList();
-    request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'licenseList', '', $licenses);
+    //request_log('licenses', false, __FUNCTION__, 'cloudlinux', 'licenseList', '', $licenses);
     return $licenses;
 }
 
