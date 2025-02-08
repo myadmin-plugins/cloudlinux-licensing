@@ -1,16 +1,16 @@
 1 - CloudLinux OS Legacy
 3 - ELS for CentOS 6
-4 - CloudLinux OS Solo
-5 - CloudLinux OS Admin
-16 - KernelCare
-17 - KernelCare Plus
-40 - Imunify AV Plus
-41 - Imunify for single user
-42 - Imunify for 30 users
-43 - Imunify for 250 users
+4 - CloudLinux OS Solo - 6.00
+5 - CloudLinux OS Admin - 12.00
+16 - KernelCare - 1.70
+17 - KernelCare Plus - 5.00
+40 - Imunify AV Plus - 3.00
+41 - Imunify for single user - 4.00
+42 - Imunify for 30 users - 8.00
+43 - Imunify for 250 users - 11.20
 44 - Imunify for 5 users
-49 - Imunify Unlimited
-1002 - CloudLinux OS Shared Pro
+49 - Imunify Unlimited 16 - 16.00
+1002 - CloudLinux OS Shared Pro - 13.00
 5003 - ELS for Oracle Linux 6
 5004 - ELS for Ubuntu 16
 5005 - ELS for CentOS 8
