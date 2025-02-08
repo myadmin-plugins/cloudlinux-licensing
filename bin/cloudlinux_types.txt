@@ -1,0 +1,27 @@
+1 - CloudLinux OS Legacy
+3 - ELS for CentOS 6
+4 - CloudLinux OS Solo
+5 - CloudLinux OS Admin
+16 - KernelCare
+17 - KernelCare Plus
+40 - Imunify AV Plus
+41 - Imunify for single user
+42 - Imunify for 30 users
+43 - Imunify for 250 users
+44 - Imunify for 5 users
+49 - Imunify Unlimited
+1002 - CloudLinux OS Shared Pro
+5003 - ELS for Oracle Linux 6
+5004 - ELS for Ubuntu 16
+5005 - ELS for CentOS 8
+5011 - ELS for CentOS 6 + SLA
+5012 - ELS for CentOS 8 + SLA
+5013 - ELS for Oracle Linux 6 + SLA
+5014 - ELS for Ubuntu 16 + SLA
+5017 - ELS for CentOS 7 Standard
+5018 - ELS for CentOS 7 Complete
+5019 - ELS for Ubuntu 18
+5020 - ELS for Ubuntu 18 + SLA
+5034 - ELS for CentOS 8 Stream
+5035 - ELS for CentOS 8 Stream + SLA
+7215 - Extended Security Updates
