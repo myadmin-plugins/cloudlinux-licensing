@@ -15,7 +15,6 @@ use Detain\Cloudlinux\Cloudlinux;
 function cloudlinux_licenses_list()
 {
     if ($GLOBALS['tf']->ima == 'admin') {
-        require_once __DIR__.'/../../../workerman/statistics/Applications/Statistics/Clients/StatisticClient.php';
         $table = new \TFTable();
         $table->set_title('CloudLinux License List');
         $header = false;
