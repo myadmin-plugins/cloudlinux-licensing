@@ -27,16 +27,16 @@
 		"detain/cloudlinux-licensing": "dev-master"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "*",
-		"phpunit/phpunit-mock-objects": "*",
-		"vlucas/phpdotenv": "*",
-		"codeclimate/php-test-reporter": "*",
-		"satooshi/php-coveralls": "*",
-		"codacy/coverage": "*"
+		"phpunit/phpunit": "^9.6"
 	},
 	"autoload": {
 		"psr-4": {
 			"Detain\\MyAdminCloudlinux\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Detain\\MyAdminCloudlinux\\Tests\\": "tests/"
 		}
 	}
 }
