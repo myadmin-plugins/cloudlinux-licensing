@@ -87,7 +87,7 @@ class Plugin
             if (!is_array($response) || !in_array($event['field1'], array_values($response))) {
                 $response = $cl->license($serviceClass->getIp(), $event['field1']);
                 //$serviceExtra = $response['mainKeyNumber'].','.$response['productKey'];
-                request_log(self::$module, $GLOBALS['tf']->session->account_id, __FUNCTION__, 'cloudlinux', 'license', [$serviceClass->getIp(), $event['field1']], $response, $serviceClass->getId());
+                request_log(self::$module, \MyAdmin\App::session()->account_id, __FUNCTION__, 'cloudlinux', 'license', [$serviceClass->getIp(), $event['field1']], $response, $serviceClass->getId());
                 myadmin_log(self::$module, 'info', 'Response: '.json_encode($response), __LINE__, __FILE__, self::$module, $serviceClass->getId());
                 if ($response === false) {
                     $event['status'] = 'error';
@@ -164,7 +164,7 @@ class Plugin
                 }
             }
             if ($event['status'] == 'ok') {
-                $GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
+                \MyAdmin\App::history()->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
                 $serviceClass->set_ip($event['newip'])->save();
             }
             $event->stopPropagation();
@@ -177,7 +177,7 @@ class Plugin
     public static function getMenu(GenericEvent $event)
     {
         $menu = $event->getSubject();
-        if ($GLOBALS['tf']->ima == 'admin') {
+        if (\MyAdmin\App::ima() == 'admin') {
             $menu->add_link(self::$module.'api', 'choice=none.cloudlinux_licenses_list', '/images/myadmin/list.png', _('List all CloudLinux Licenses'));
         }
     }

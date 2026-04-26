@@ -138,7 +138,7 @@ class SourceFileAnalysisTest extends TestCase
     public function testLicensesListChecksAdminAccess(): void
     {
         $content = file_get_contents($this->srcDir . '/cloudlinux_licenses_list.php');
-        $this->assertStringContainsString("\$GLOBALS['tf']->ima == 'admin'", $content);
+        $this->assertStringContainsString("\\MyAdmin\App::ima() == 'admin'", $content);
     }
 
     /**

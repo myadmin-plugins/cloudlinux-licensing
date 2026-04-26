@@ -14,7 +14,7 @@ use Detain\Cloudlinux\Cloudlinux;
 
 function cloudlinux_licenses_list()
 {
-    if ($GLOBALS['tf']->ima == 'admin') {
+    if (\MyAdmin\App::ima() == 'admin') {
         $table = new \TFTable();
         $table->set_title('CloudLinux License List');
         $header = false;
