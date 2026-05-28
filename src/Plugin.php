@@ -92,6 +92,8 @@ class Plugin
                 if ($response === false) {
                     $event['status'] = 'error';
                     $event['status_text'] = 'Error Licensing the new IP.';
+                    $event['success'] = false;
+                    chatNotify('Failed [License '.$serviceClass->getId().'](https://my.interserver.net/admin/view_service?id='.$serviceClass->getId().'&module=licenses) CloudLinux Activation IP:'.$serviceClass->getIp().' Type:'.$event['field1'].' - Cloudlinux::license() returned false', 'notifications');
                 } else {
                     $event['status'] = 'ok';
                     $event['status_text'] = 'The IP Address has been licensed.';
