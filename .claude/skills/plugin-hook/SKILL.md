@@ -1,6 +1,6 @@
 ---
 name: plugin-hook
-description: Adds a new Symfony EventDispatcher hook to src/Plugin.php — registers it in getHooks() and implements the static handler. Use when user says 'add hook', 'handle event', 'new plugin action', or adds a new lifecycle event to the CloudLinux licensing plugin. Do NOT use for modifying the detain/cloudlinux-licensing API client or adding new API methods to cloudlinux.inc.php. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Adds a new Symfony EventDispatcher hook to src/Plugin.php — registers it in getHooks() and implements the static handler. Use when user says 'add hook', 'handle event', 'new plugin action', or adds a new lifecycle event to the CloudLinux licensing plugin. Do NOT use for modifying the detain/cloudlinux-licensing API client or adding new API methods to cloudlinux.inc.php. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file

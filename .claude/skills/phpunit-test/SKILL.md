@@ -1,6 +1,6 @@
 ---
 name: phpunit-test
-description: Writes PHPUnit 9 tests matching patterns in tests/PluginTest.php and tests/SourceFileAnalysisTest.php. Use when user says 'add test', 'write unit test', 'test this method', adds new methods to src/, or needs structural assertions via ReflectionClass. Covers reflection-based class/method/property assertions and file_get_contents source analysis. Do NOT use for integration tests requiring a live CloudLinux API connection or database. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Writes PHPUnit 9 tests matching patterns in tests/PluginTest.php and tests/SourceFileAnalysisTest.php. Use when user says 'add test', 'write unit test', 'test this method', adds new methods to src/, or needs structural assertions via ReflectionClass. Covers reflection-based class/method/property assertions and file_get_contents source analysis. Do NOT use for integration tests requiring a live CloudLinux API connection or database. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file
