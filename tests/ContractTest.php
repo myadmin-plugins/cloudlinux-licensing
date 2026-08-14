@@ -108,8 +108,6 @@ class ContractTest extends ServicePluginTestCase
 
         $this->assertSame(
             [
-                'plugin.install',
-                'plugin.uninstall',
                 'licenses.settings',
                 'licenses.activate',
                 'licenses.reactivate',

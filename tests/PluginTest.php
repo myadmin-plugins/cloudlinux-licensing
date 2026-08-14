@@ -133,8 +133,6 @@ class PluginTest extends TestCase
         $this->assertIsArray($hooks);
 
         $expectedKeys = [
-            'plugin.install',
-            'plugin.uninstall',
             'licenses.settings',
             'licenses.activate',
             'licenses.reactivate',
@@ -156,7 +154,7 @@ class PluginTest extends TestCase
     public function testGetHooksCount(): void
     {
         $hooks = Plugin::getHooks();
-        $this->assertCount(10, $hooks);
+        $this->assertCount(8, $hooks);
     }
 
     /**
@@ -207,8 +205,6 @@ class PluginTest extends TestCase
     public function testEventHandlerMethodSignatures(): void
     {
         $eventMethods = [
-            'getInstall',
-            'getUninstall',
             'getActivate',
             'getDeactivate',
             'getDeactivateIp',
@@ -276,7 +272,7 @@ class PluginTest extends TestCase
     public function testPublicMethodCount(): void
     {
         $publicMethods = $this->reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
-        $this->assertCount(11, $publicMethods);
+        $this->assertCount(9, $publicMethods);
     }
 
     /**
@@ -286,8 +282,6 @@ class PluginTest extends TestCase
     public function testEventHandlerReturnTypes(): void
     {
         $eventMethods = [
-            'getInstall',
-            'getUninstall',
             'getActivate',
             'getDeactivate',
             'getDeactivateIp',
