@@ -32,8 +32,6 @@ class Plugin
     public static function getHooks()
     {
         return [
-            'plugin.install' => [__CLASS__, 'getInstall'],
-            'plugin.uninstall' => [__CLASS__, 'getUninstall'],
             self::$module.'.settings' => [__CLASS__, 'getSettings'],
             self::$module.'.activate' => [__CLASS__, 'getActivate'],
             self::$module.'.reactivate' => [__CLASS__, 'getActivate'],
@@ -43,33 +41,6 @@ class Plugin
             'function.requirements' => [__CLASS__, 'getRequirements'],
             'ui.menu' => [__CLASS__, 'getMenu']
         ];
-    }
-
-    /**
-     * @param \Symfony\Component\EventDispatcher\GenericEvent $event
-     */
-    public static function getInstall(GenericEvent $event)
-    {
-        $plugin = $event->getSubject();
-        $serviceCategory = $plugin->addServiceCategory(self::$module, 'cloudlinux', 'CloudLinux');
-        $plugin->addDefine('SERVICE_TYPES_CLOUDLINUX', $serviceCategory);
-        $serviceType = $plugin->addServiceType($serviceCategory, self::$module, 'CloudLinux');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'CloudLinux License', 10.00, 0, 1, 1, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'KernelCare License', 2.95, 0, 1, 16, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'ImunityAV+', 6, 0, 1, 40, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 single user', 12, 0, 1, 41, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 30 users', 25, 0, 1, 42, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 up to 250 users', 35, 0, 1, 43, '');
-        $plugin->addService($serviceCategory, $serviceType, self::$module, 'Imunity360 unlimited users', 45, 0, 1, 49, '');
-    }
-
-    /**
-     * @param \Symfony\Component\EventDispatcher\GenericEvent $event
-     */
-    public static function getUninstall(GenericEvent $event)
-    {
-        $plugin = $event->getSubject();
-        $plugin->disableServiceCategory(self::$module, 'cloudlinux');
     }
 
     /**

@@ -237,19 +237,6 @@ class SourceFileAnalysisTest extends TestCase
     }
 
     /**
-     * Tests that the getInstall handler registers multiple services.
-     * CloudLinux offers several license types: CloudLinux, KernelCare, and Imunify variants.
-     */
-    public function testGetInstallRegistersMultipleServices(): void
-    {
-        $content = file_get_contents($this->srcDir . '/Plugin.php');
-        $this->assertStringContainsString('CloudLinux License', $content);
-        $this->assertStringContainsString('KernelCare License', $content);
-        $this->assertStringContainsString('ImunityAV+', $content);
-        $this->assertStringContainsString('Imunity360', $content);
-    }
-
-    /**
      * Tests that the getRequirements handler registers all expected page/function requirements.
      */
     public function testGetRequirementsRegistersAllDependencies(): void
